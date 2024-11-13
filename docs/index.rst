@@ -3,14 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to hybrid_epcis_docs's documentation!
+Welcome to Hybrid EPCIS Documentation!
 =============================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
+   epcis_event_hash_generator
 
 Indices and tables
 ==================

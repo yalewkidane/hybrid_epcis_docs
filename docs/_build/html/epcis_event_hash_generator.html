@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPCIS Event Hash Generator &mdash; hybrid_epcis_docs 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/password-protect.js?v=8665ec9d"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Hybrid EPCIS Documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            hybrid_epcis_docs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EPCIS Event Hash Generator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install-and-run">How to Install and Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#more-examples">More Examples</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hybrid_epcis_docs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EPCIS Event Hash Generator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/epcis_event_hash_generator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="epcis-event-hash-generator">
+<span id="epcis-hash"></span><h1>EPCIS Event Hash Generator<a class="headerlink" href="#epcis-event-hash-generator" title="Permalink to this heading"></a></h1>
+<p>This page describes the <cite>epcis_hash</cite> functionality.</p>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#how-to-install-and-run" id="id2">How to Install and Run</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id3">Usage</a></p></li>
+<li><p><a class="reference internal" href="#more-examples" id="id4">More Examples</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p><cite>epcis_event_hash_generator</cite> is a module to generate a hash for EPCIS events based on the GS1 CBV standard.
+You can simply run it using Docker Compose and use the REST API to generate the hash of an event.
+The hash of the event can then be used as the <cite>eventID</cite> to create an EPCIS event, allowing users to check for
+the event’s integrity later.</p>
+<p>Below, there are usage instructions on how to install it using Docker and how to make requests using the REST API.</p>
+</section>
+<section id="how-to-install-and-run">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">How to Install and Run</a><a class="headerlink" href="#how-to-install-and-run" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Create a Directory for Hash_Generator</strong>:
+First, create a directory for the Hash Generator.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>Hash_Generator
+<span class="nb">cd</span><span class="w"> </span>Hash_Generator
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create `docker-compose.yml`</strong>:
+Inside the directory, create a <cite>docker-compose.yml</cite> file and add the following content:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.3&#39;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">epcis-hash-generator</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yaledoc/epcis_event_hash_generator:0.1</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;${SERVER_PORT}:${SERVER_PORT}&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NODE_ENV=production</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT=${SERVER_PORT}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEFAULT_HASH_ALGORITHM=${DEFAULT_HASH_ALGORITHM}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create `.env` File</strong>:
+Create a <cite>.env</cite> file in the same directory and save the following content:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">SERVER_PORT</span><span class="o">=</span><span class="s">7085</span>
+<span class="na">DEFAULT_HASH_ALGORITHM</span><span class="o">=</span><span class="s">sha256</span><span class="w"> </span><span class="c1"># Options: sha256, sha3-256, sha384, sha512</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run Docker Compose</strong>:
+Use Docker Compose to start the service.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>To generate a hash for an EPCIS event, use the following endpoint.</p>
+<dl class="simple">
+<dt><strong>Endpoint</strong>:</dt><dd><p><cite>http://{{Server-IP}}:{{SERVER_PORT}}/epcis/hash/events</cite></p>
+</dd>
+<dt><strong>Method</strong>:</dt><dd><p><strong>POST</strong></p>
+</dd>
+<dt><strong>Headers</strong>:</dt><dd><ul class="simple">
+<li><p><cite>hashAlg</cite>: <cite>sha256</cite></p></li>
+<li><p><cite>Content-Type</cite>: <cite>application/json</cite></p></li>
+</ul>
+</dd>
+</dl>
+<p>Request Body:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://gs1.github.io/EPCIS/epcis-context.jsonld&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eventID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ni:///sha-256;df7bb3c352fef055578554f09f5e2aa41782150ced7bd0b8af24dd3ccb30ba69?ver=CBV2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ObjectEvent&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OBSERVE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bizStep&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shipping&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;disposition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_transit&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;epcList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2017&quot;</span><span class="p">,</span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2018&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;eventTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eventTimeZoneOffset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-06:00&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;readPoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0614142.56346.1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;http://example//readPoint//value&quot;</span><span class="p">:</span><span class="s2">&quot;readpointValue&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;bizTransactionList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;po&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bizTransaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://transaction.acme.com/po/12345678&quot;</span><span class="w"> </span><span class="p">}],</span>
+<span class="w">    </span><span class="nt">&quot;ext:test&quot;</span><span class="p">:</span><span class="mi">4</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Response Body:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">X-Powered-By</span><span class="o">:</span> <span class="l">Express</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json; charset=utf-8</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">93</span>
+<span class="na">ETag</span><span class="o">:</span> <span class="l">W/&quot;5d-And/pjoNBcRwUb4q32RmvqUYvNs&quot;</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Wed, 13 Nov 2024 05:50:42 GMT</span>
+<span class="na">Connection</span><span class="o">:</span> <span class="l">close</span>
+
+<span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;ni:///sha-256;dd1378e85f309e4a51fadaad03a8b9f71248c4dc9800d347cdefc94d04ae1f5f?ver=CBV2.0&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="more-examples">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">More Examples</a><a class="headerlink" href="#more-examples" title="Permalink to this heading"></a></h2>
+<p>Here are some examples of using the <cite>epcis_event_hash_generator</cite>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPCISDocument&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;schemaVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;creationDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-04T14:59:02.099+02:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;sender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0353579.00001.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;receiver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:5012345.00001.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;instanceIdentifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;epcisBody&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;eventList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;eventID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ni:///sha-256;87b5f18a69993f0052046d4687dfacdf48f7c988cfabda2819688c86b4066a49?ver=CBV2.0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AggregationEvent&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventTimeZoneOffset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+02:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;parentID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sscc:0614141.1234567890&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;childEPCs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2017&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2018&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OBSERVE&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;bizStep&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;receiving&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;disposition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_progress&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;readPoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0614141.00777.0&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bizLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0614141.00888.0&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;childQuantityList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">&quot;epcClass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:idpat:sgtin:4012345.098765.*&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">&quot;epcClass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:class:lgtin:4012345.012345.998877&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">200.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;uom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KGM&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;eventID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ni:///sha-256;df7bb3c352fef055...f24dd3ccb30ba69?ver=CBV2.0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ObjectEvent&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ADD&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;bizStep&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shipping&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;disposition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_transit&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;epcList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2017&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2018&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;eventTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-04-03T20:33:31.116000-06:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;recordTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-04-03T20:33:31.116000-06:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventTimeZoneOffset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-06:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;readPoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0614141.07346.1234&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bizTransactionList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;po&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bizTransaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://transaction.acme.com/po/12345678&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;https://ref.gs1.org/standards/epcis/2.0.0/epcis-context.jsonld&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;ext3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext3/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ext2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext2/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ext1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext1/&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;ext1:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:string&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext1:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:int&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:boolean&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext1:float&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:double&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext1:time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:dateTimeStamp&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:string&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext2:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:int&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:boolean&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPCISDocument&quot;</span><span class="p">,</span>
+<span class="nt">&quot;schemaVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+<span class="nt">&quot;creationDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-04T14:59:02.099+02:00&quot;</span><span class="p">,</span>
+<span class="nt">&quot;sender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0353579.00001.0&quot;</span><span class="p">,</span>
+<span class="nt">&quot;receiver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:5012345.00001.0&quot;</span><span class="p">,</span>
+<span class="nt">&quot;instanceIdentifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span>
+<span class="nt">&quot;epcisBody&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;eventList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ObjectEvent&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2005-04-05T02:33:31.116Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventTimeZoneOffset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-06:00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;eventID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:uuid:374d95fc-9457-4a51-bd6a-0bba133845a8&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;certificationInfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://accreditation-council.example.org/certificate/ABC12345&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;epcList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;urn:epc:id:sgtin:0614141.107346.2018&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ADD&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;bizStep&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;receiving&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;disposition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;in_progress&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;readPoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0012345.22222.400&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bizLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0012345.11111.0&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;bizTransactionList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;po&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;bizTransaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:gdti:0614141.00001.1618034&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pedigree&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;bizTransaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:gsrn:0614141.0000010253&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;quantityList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;epcClass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:class:lgtin:4012345.012345.998877&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;uom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KGM&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;sourceList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;location&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:4012345.00225.0&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;possessing_party&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:pgln:4012345.00225&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;owning_party&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:pgln:4012345.00225&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;destinationList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;location&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:sgln:0614141.00777.0&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;possessing_party&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:pgln:0614141.00777&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;owning_party&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:pgln:0614141.00777&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;sensorElementList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;sensorMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-04-02T13:05:00.000Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;deviceID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:giai:4000001.111&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;deviceMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://id.gs1.org/8004/4000001111&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;rawData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.org/8004/401234599999&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-04-02T12:55:01.000Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-04-02T13:55:00.000Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;dataProcessingMethod&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/253/4012345000054987&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;bizRules&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/253/4012345000054987&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:someFurtherMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someText&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;sensorReport&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;deviceID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:epc:id:giai:4000001.111&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;rawData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.org/8004/401234599999&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;dataProcessingMethod&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/253/4012345000054987&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-19T13:00:00.000Z&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;microorganism&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.ncbi.nlm.nih.gov/taxonomy/1126011&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;chemicalSubstance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://identifiers.org/inchikey:CZMRCDWAGMRECN-UGDNZRGBSA-N&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example:x&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;stringValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SomeString&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;booleanValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;hexBinaryValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f0f0f0&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;uriValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://id.gs1.org/8004/4000001111&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;minValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;maxValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">26.2</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;meanValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">13.2</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;percRank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;percValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.7</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;uom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CEL&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;sDev&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;ext1:someFurtherReportData&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;someText&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;deviceMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://id.gs1.org/8004/4000001111&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;ext1:float&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;12&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;22&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;stringInArray&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;14&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;23.0&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;stringInArrayInObjectInArray&quot;</span>
+<span class="w">                    </span><span class="p">],</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObjectInArray&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInArray&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;21&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;stringInArrayInObject&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObject&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObject&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;ext1:default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringAsDefaultValue&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;ext1:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;persistentDisposition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;completeness_verified&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;unset&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;completeness_inferred&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ilmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ext1:float&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;12&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;22&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;stringInArray&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;14&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;23.0&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;stringInArrayInObjectInArray&quot;</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObjectInArray&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;ext2:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInArray&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;21&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;stringInArrayInObject&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObject&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObject&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:countryOfExport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KR&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:grossWeight&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:netWeight&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringAsDefaultValue&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:countryOfOrigin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GB&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:drainedWeight&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cbvmda:lotNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC123&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ext1:float&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;12&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;22&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;2013-06-08T14:58:56.591Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;stringInArray&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;14&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;23.0&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;stringInArrayInObjectInArray&quot;</span>
+<span class="w">                </span><span class="p">],</span>
+<span class="w">                </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObjectInArray&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;ext2:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInArray&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ext2:array&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;21&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;stringInArrayInObject&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext2:object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;ext3:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObjectInObject&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ext2:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringInObject&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ext1:default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stringAsDefaultValue&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:int&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ext1:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">},</span>
+<span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;https://ref.gs1.org/standards/epcis/2.0.0/epcis-context.jsonld&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ext3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext3/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ext2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext2/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ext1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/ext1/&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ext1:string&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:string&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;ext1:int&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="s2">&quot;xsd:int&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:boolean&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ext1:float&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:double&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;ext1:time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:dateTimeStamp&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;ext3:string&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;ext2:int&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:int&quot;</span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;ext1:boolean&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;@type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xsd:boolean&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Hybrid EPCIS Documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yalew Kidane.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
