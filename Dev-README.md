@@ -1,5 +1,23 @@
 # Developer Documentation
 
+
+The passward is "oliot", you can find it under _static/password-protect.js file. I added this to make the page private. It can be removed. To remove (remove it from conf.py file and remove the file it self)
+
+
+## To start working on this 
+```sh
+git pull
+cd docs
+#make changes on filles 
+make html
+
+
+git add .
+git commit -m "message ..."
+git push origin 
+#make sure to push to branch master 
+```
+
 ## How to Create a New Page in Sphinx Documentation
 
 To create a new page in your Sphinx documentation, follow these steps:

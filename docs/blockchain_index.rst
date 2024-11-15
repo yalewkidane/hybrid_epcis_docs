@@ -10,14 +10,7 @@ Welcome to Hybrid EPCIS Documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   epcis_mongo
-   dkg
-   blockchain_index
-   epcis_event_hash_generator
+   fully_onchain
+   hybrid
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
